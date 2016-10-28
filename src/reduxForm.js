@@ -225,6 +225,8 @@ const createReduxForm =
               destroy()
             }
 
+            this.unmounted = true;
+
             instances--;
           }
 
@@ -245,7 +247,7 @@ const createReduxForm =
           }
 
           unregister(name) {
-            if (!this.destroyed && !instances) {
+            if (!this.destroyed && (!this.props.unmounted || !instances)) {
               this.props.unregisterField(name)
             }
           }
